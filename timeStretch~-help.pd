@@ -212,7 +212,6 @@ commands to specific targeted voices.;
 #X restore 58 425 pd output;
 #X obj 41 334 cnv 15 130 60 empty empty empty 20 12 0 14 -228856 -66577
 0;
-#X text 545 469 [timeStretch~] version 0.0.1;
 #X text 545 489 William Brent \, March 2018;
 #N canvas 704 67 940 594 attack-release-playback-basics 0;
 #X msg 147 228 bend 0 \$1;
@@ -387,10 +386,11 @@ the difficulties of time stretching transients.;
 #X text 213 327 outlet 1: output signal;
 #X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
 when a voice has finished playback;
-#X connect 0 0 14 0;
-#X connect 1 0 14 0;
-#X connect 4 0 14 0;
-#X connect 9 0 14 0;
-#X connect 10 0 14 0;
-#X connect 14 0 5 0;
-#X connect 14 1 13 0;
+#X text 545 469 [timeStretch~] version 0.1;
+#X connect 0 0 13 0;
+#X connect 1 0 13 0;
+#X connect 4 0 13 0;
+#X connect 8 0 13 0;
+#X connect 9 0 13 0;
+#X connect 13 0 5 0;
+#X connect 13 1 12 0;

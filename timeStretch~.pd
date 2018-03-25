@@ -80,7 +80,7 @@
 #X obj 257 264 max 0;
 #X obj 479 233 == 0;
 #X obj 479 208 max 0;
-#X obj 466 349 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 466 349 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 252 413 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
@@ -466,7 +466,6 @@ redundant info. For instance \, a given voice should know its sample's
 sampling rate and array name symbol. No need to pass those in again.
 ;
 #X obj 462 247 declare -path ./lib;
-#X text 460 273 [timeStretch~] version 0.0.1;
 #X text 460 293 William Brent \, March 2018;
 #N canvas 647 119 793 726 FFT-analysis 0;
 #X obj 46 634 *~;
@@ -808,9 +807,10 @@ the conjugate of the back window., f 27;
 #X obj 197 184 r \$0-timestretch-note-off-feedback;
 #X obj 197 205 list prepend note-off;
 #X obj 197 226 list trim;
+#X text 460 273 [timeStretch~] version 0.1;
 #X connect 1 0 0 0;
 #X connect 2 0 3 0;
-#X connect 8 0 1 0;
+#X connect 7 0 1 0;
+#X connect 10 0 11 0;
 #X connect 11 0 12 0;
-#X connect 12 0 13 0;
-#X connect 13 0 10 0;
+#X connect 12 0 9 0;
