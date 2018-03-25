@@ -1,1 +1,3 @@
 # timeStretch_tilde
+
+[timeStretch~] is a Pd-vanilla abstraction for playing back pre-recorded samples at various speeds and transpositions. At its core is the I07.phase.vocoder.pd example patch from Pd's built-in documentation, which produces high-quality results for time compression/expansion. [timeStretch~] adds functionality for changing sample arrays on the fly, 16-voice polyphony, and has commands designed for navigating the difficulties of time stretching transients.

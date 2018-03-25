@@ -1,6 +1,5 @@
-#N canvas 190 240 956 563 10;
+#N canvas 375 321 818 556 10;
 #X declare -path ./lib;
-#X text 464 119 Polyphony is hard-coded to 16 voices;
 #N canvas 576 84 627 531 preset-duration-playback 0;
 #X obj 54 439 outlet;
 #X obj 54 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
@@ -15,27 +14,30 @@
 #X obj 163 299 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 163 319 f \$0;
-#X msg 87 177 play 1 \$1-piano 30000 94 300 300 0;
 #X text 335 49 "play" command arguments:;
 #X text 335 79 \$1: voice number (0-15) \; \$2: sample array name \;
 \$3: desired duration (ms) \; \$4: amplitude (dB) \; \$5: transposition
 (cents) \; \$6: onset duration (ms) \; \$7: release time (% of duration)
 \;;
-#X msg 54 107 play 0 \$1-piano 3000 94 0 250 20;
 #X msg 136 250 play 2 \$1-voice 5000 100 -300 1000 5;
 #X msg 163 339 play 3 \$1-voice 4000 90 300 1150 0;
+#X msg 87 177 play 1 \$1-piano 10000 94 300 300 0;
+#X msg 54 107 play 0 \$1-piano 2000 94 0 250 10;
+#X msg 220 378 stop 3;
+#X text 289 378 stop playback in a given voice early;
 #X connect 1 0 2 0;
-#X connect 2 0 12 0;
+#X connect 2 0 14 0;
 #X connect 3 0 4 0;
-#X connect 4 0 9 0;
+#X connect 4 0 13 0;
 #X connect 5 0 6 0;
-#X connect 6 0 13 0;
+#X connect 6 0 11 0;
 #X connect 7 0 8 0;
-#X connect 8 0 14 0;
-#X connect 9 0 0 0;
+#X connect 8 0 12 0;
+#X connect 11 0 0 0;
 #X connect 12 0 0 0;
 #X connect 13 0 0 0;
 #X connect 14 0 0 0;
+#X connect 15 0 0 0;
 #X restore 58 25 pd preset-duration-playback;
 #N canvas 587 516 654 345 settings 0;
 #X msg 44 126 window-size \$1;
@@ -48,6 +50,7 @@
 #X text 241 200 Internal default is 44.1kHz \, but if your samples
 are at a different sampling rate \, you can set it here. All samples
 used with [timeStretch~] should be at the same sampling rate.;
+#X text 165 53 Internal default is 2048;
 #X connect 0 0 5 0;
 #X connect 1 0 0 0;
 #X connect 2 0 0 0;
@@ -68,8 +71,8 @@ used with [timeStretch~] should be at the same sampling rate.;
 #X connect 2 0 1 0;
 #X connect 3 0 0 0;
 #X connect 4 0 0 0;
-#X restore 717 429 pd load-samples;
-#X obj 717 449 declare -path ./lib;
+#X restore 547 409 pd load-samples;
+#X obj 547 429 declare -path ./lib;
 #N canvas 665 198 657 556 keyboard 0;
 #X obj 51 495 outlet;
 #X obj 51 50 notein;
@@ -90,9 +93,6 @@ used with [timeStretch~] should be at the same sampling rate.;
 -1 -1;
 #X text 325 236 12dB of dynamic range, f 9;
 #X msg 485 371 release \$1 500;
-#X text 206 71 Here's a simple example showing use in a MIDI keyboard
-context. Mod wheel controls playhead position \, and the pitch bend
-wheel does what it was born to do.;
 #N canvas 0 23 459 317 mod-wheel-playhead 0;
 #X obj 84 41 ctlin 1;
 #X obj 84 62 / 1.27;
@@ -161,6 +161,11 @@ activated voice., f 30;
 #X restore 130 434 pd pitchbend;
 #X obj 143 204 - 72;
 #X text 187 198 Treble C split point for unity pitch, f 9;
+#X text 221 49 Here's a simple example showing use in a MIDI keyboard
+context. The mod wheel controls playhead position \, and the pitch
+bend wheel does what it was born to do. Both work on all active voices
+globally \, though you could design things differently and apply playhead/bend
+commands to specific targeted voices.;
 #X connect 1 0 10 0;
 #X connect 1 1 10 1;
 #X connect 2 0 4 0;
@@ -175,7 +180,7 @@ activated voice., f 30;
 #X connect 8 0 9 0;
 #X connect 9 0 14 2;
 #X connect 10 0 2 0;
-#X connect 10 1 21 0;
+#X connect 10 1 20 0;
 #X connect 10 2 3 1;
 #X connect 10 2 7 0;
 #X connect 10 2 12 1;
@@ -184,9 +189,9 @@ activated voice., f 30;
 #X connect 13 0 0 0;
 #X connect 14 0 13 0;
 #X connect 17 0 0 0;
+#X connect 18 0 0 0;
 #X connect 19 0 0 0;
-#X connect 20 0 0 0;
-#X connect 21 0 11 0;
+#X connect 20 0 11 0;
 #X restore 156 187 pd keyboard;
 #N canvas 4 23 592 473 output 0;
 #X obj 370 277 *~;
@@ -207,8 +212,8 @@ activated voice., f 30;
 #X restore 58 425 pd output;
 #X obj 41 334 cnv 15 130 60 empty empty empty 20 12 0 14 -228856 -66577
 0;
-#X text 715 489 [timeStretch~] version 0.0.1;
-#X text 715 509 William Brent \, March 2018;
+#X text 545 469 [timeStretch~] version 0.0.1;
+#X text 545 489 William Brent \, March 2018;
 #N canvas 704 67 940 594 attack-release-playback-basics 0;
 #X msg 147 228 bend 0 \$1;
 #X obj 57 538 outlet;
@@ -366,11 +371,26 @@ onset occurs., f 42;
 #X connect 27 0 10 0;
 #X connect 28 0 0 0;
 #X restore 96 87 pd attack-release-playback-more;
-#X text 464 49 Main description of [timeStretch~].;
+#X text 377 163 I especially like it for sustaining percussive samples
+indefinitely. The "attack" command starts playback at regular speed
+\, and then freezes at a specified sustain point after the transient
+until a "release" command is sent.;
+#X text 377 53 [timeStretch~] is a Pd-vanilla abstraction for playing
+back pre-recorded samples at various speeds and transpositions. At
+its core is the I07.phase.vocoder.pd example patch from Pd's built-in
+documentation \, which produces high-quality time compression/expansion
+results. [timeStretch~] adds functionality for changing sample arrays
+on the fly \, 16-voice polyphony \, and has commands designed for navigating
+the difficulties of time stretching transients.;
+#X obj 225 408 print;
 #X obj 58 355 timeStretch~;
-#X connect 1 0 13 0;
-#X connect 2 0 13 0;
-#X connect 5 0 13 0;
-#X connect 10 0 13 0;
-#X connect 11 0 13 0;
-#X connect 13 0 6 0;
+#X text 213 327 outlet 1: output signal;
+#X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
+when a voice has finished playback;
+#X connect 0 0 14 0;
+#X connect 1 0 14 0;
+#X connect 4 0 14 0;
+#X connect 9 0 14 0;
+#X connect 10 0 14 0;
+#X connect 14 0 5 0;
+#X connect 14 1 13 0;
