@@ -244,7 +244,7 @@ bang \; \$5-timestretch-\$1-tablename \$2 \; \$5-timestretch-\$1-speed
 #X text 178 64 voiceID \, name of table \, gain (dB) \, transposition
 (cents) \, onset duration (ms);
 #X obj 36 40 t l l;
-#N canvas 337 152 518 269 store-array-names 0;
+#N canvas 337 152 764 441 store-array-names 0;
 #X obj 49 95 list split 1;
 #X obj 99 135 list split 1;
 #X obj 199 65 text define \$0-timestretch-attack-arrays;
@@ -252,6 +252,17 @@ bang \; \$5-timestretch-\$1-tablename \$2 \; \$5-timestretch-\$1-speed
 #X obj 49 208 text set \$0-timestretch-attack-arrays;
 #X obj 49 178 symbol;
 #X obj 49 116 t b f;
+#X obj 363 225 until;
+#X obj 363 277 f;
+#X obj 393 279 + 1;
+#X msg 381 253 0;
+#X obj 363 172 f;
+#X obj 413 172 r \$0-timestretch-num-voices;
+#X obj 363 151 r \$0-ts-lb2;
+#X obj 363 193 t f b;
+#X obj 363 349 text set \$0-timestretch-attack-arrays;
+#X obj 363 298 t b f;
+#X msg 363 319 symbol NULL;
 #X connect 0 0 6 0;
 #X connect 0 1 1 0;
 #X connect 1 0 5 1;
@@ -259,6 +270,19 @@ bang \; \$5-timestretch-\$1-tablename \$2 \; \$5-timestretch-\$1-speed
 #X connect 5 0 4 0;
 #X connect 6 0 5 0;
 #X connect 6 1 4 1;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 8 0 16 0;
+#X connect 9 0 8 1;
+#X connect 10 0 8 1;
+#X connect 11 0 14 0;
+#X connect 12 0 11 1;
+#X connect 13 0 11 0;
+#X connect 14 0 7 0;
+#X connect 14 1 10 0;
+#X connect 16 0 17 0;
+#X connect 16 1 15 1;
+#X connect 17 0 15 0;
 #X restore 120 136 pd store-array-names;
 #X connect 0 0 6 0;
 #X connect 1 0 4 0;
