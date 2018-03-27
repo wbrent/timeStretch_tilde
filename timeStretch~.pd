@@ -322,35 +322,49 @@ bang \; \$5-timestretch-\$1-tablename \$2 \; \$5-timestretch-\$1-speed
 #X connect 10 0 9 0;
 #X connect 10 1 4 0;
 #X connect 11 0 8 0;
-#X restore 36 254 pd location-percent-to-ms;
-#X text 132 206 voiceID \, sample table symbol \, samplerate \, location
+#X restore 36 294 pd location-percent-to-ms;
+#X text 132 236 voiceID \, sample table symbol \, samplerate \, location
 (percent);
-#X text 82 284 voice ID \, location (ms);
+#X text 82 324 voice ID \, location (ms);
 #X obj 36 40 list split 1;
-#X obj 36 121 list append;
-#X obj 106 91 text get \$0-timestretch-attack-arrays;
+#X obj 36 191 list append;
+#X obj 106 61 text get \$0-timestretch-attack-arrays;
 #X obj 36 61 t f f;
-#X obj 36 151 list append;
-#X obj 126 151 r \$0-timestretch-0-samplerate;
-#X obj 36 172 list append;
+#X obj 36 221 list append;
+#X obj 126 211 r \$0-timestretch-0-samplerate;
+#X obj 36 242 list append;
+#X obj 106 82 select NULL;
+#X msg 106 133 0;
+#X obj 36 162 spigot;
+#X obj 176 102 t a b;
+#X obj 176 153 symbol;
+#X msg 136 133 1;
 #X connect 0 0 6 0;
 #X connect 1 0 2 0;
 #X connect 3 0 1 0;
 #X connect 6 0 9 0;
 #X connect 6 1 12 1;
 #X connect 7 0 10 0;
-#X connect 8 0 7 1;
-#X connect 9 0 7 0;
+#X connect 8 0 13 0;
+#X connect 9 0 15 0;
 #X connect 9 1 8 0;
 #X connect 10 0 12 0;
 #X connect 11 0 10 1;
 #X connect 12 0 3 0;
+#X connect 13 0 14 0;
+#X connect 13 1 16 0;
+#X connect 14 0 15 1;
+#X connect 15 0 7 0;
+#X connect 16 0 17 0;
+#X connect 16 1 18 0;
+#X connect 17 0 7 1;
+#X connect 18 0 15 1;
 #X restore 289 374 pd playhead-command;
-#N canvas 70 111 680 636 release-command 0;
+#N canvas 70 111 658 714 release-command 0;
 #X obj 36 19 inlet;
-#X obj 36 487 list append \$0;
-#X text 161 392 voice ID \, release-time (ms);
-#X msg 36 528 \; \$3-timestretch-\$1-speed 100 \; \$3-timestretch-\$1-note-off-release-time
+#X obj 36 607 list append \$0;
+#X text 161 512 voice ID \, release-time (ms);
+#X msg 36 648 \; \$3-timestretch-\$1-speed 100 \; \$3-timestretch-\$1-note-off-release-time
 \$2 \;;
 #N canvas 427 547 538 416 format-release-message 0;
 #X obj 48 42 inlet;
@@ -376,28 +390,34 @@ time (ms);
 #X connect 7 0 6 0;
 #X connect 7 1 4 0;
 #X connect 9 0 6 1;
-#X restore 36 324 pd format-release-message;
-#X text 120 272 voiceID \, name of table \, file samplerate \, release
+#X restore 36 444 pd format-release-message;
+#X text 120 392 voiceID \, name of table \, file samplerate \, release
 time (ms);
-#X obj 139 420 unpack f f;
-#X floatatom 221 444 5 0 0 0 - - -, f 5;
-#X floatatom 139 442 5 0 0 0 - - -, f 5;
-#X text 262 308 This should really check to see how much time is left
+#X obj 139 540 unpack f f;
+#X floatatom 221 564 5 0 0 0 - - -, f 5;
+#X floatatom 139 562 5 0 0 0 - - -, f 5;
+#X text 262 428 This should really check to see how much time is left
 based on the current playhead position \, and time stretch so that
 it plays to the end of the file in exactly the number of (ms) requested
 \, fading out as well.;
 #X obj 36 40 list split 1;
-#X obj 36 191 list append;
-#X obj 99 101 text get \$0-timestretch-attack-arrays;
-#X obj 36 221 list append;
-#X obj 126 221 r \$0-timestretch-0-samplerate;
-#X obj 36 242 list append;
-#X text 376 133 This re-sends the current sample array name for re-calculating
+#X obj 36 311 list append;
+#X obj 99 111 text get \$0-timestretch-attack-arrays;
+#X obj 36 341 list append;
+#X obj 126 341 r \$0-timestretch-0-samplerate;
+#X obj 36 362 list append;
+#X text 262 205 This re-sends the current sample array name for re-calculating
 something in [pd calc-note-off-release-time] in case the playhead position
 was changed between an "attack" and "release" message., f 38;
 #X obj 36 61 t f f f;
-#X msg 150 170 \; \$3-timestretch-\$2-tablename \$1 \;;
-#X obj 150 139 pack s f \$0;
+#X msg 169 290 \; \$3-timestretch-\$2-tablename \$1 \;;
+#X obj 169 259 pack s f \$0;
+#X obj 99 135 select NULL;
+#X msg 99 186 0;
+#X obj 36 235 spigot;
+#X obj 169 155 t a b;
+#X obj 169 206 symbol;
+#X msg 129 186 1;
 #X connect 0 0 10 0;
 #X connect 1 0 3 0;
 #X connect 4 0 1 0;
@@ -407,15 +427,23 @@ was changed between an "attack" and "release" message., f 38;
 #X connect 10 0 17 0;
 #X connect 10 1 15 1;
 #X connect 11 0 13 0;
-#X connect 12 0 11 1;
-#X connect 12 0 19 0;
+#X connect 12 0 20 0;
 #X connect 13 0 15 0;
 #X connect 14 0 13 1;
 #X connect 15 0 4 0;
-#X connect 17 0 11 0;
+#X connect 17 0 22 0;
 #X connect 17 1 12 0;
 #X connect 17 2 19 1;
 #X connect 19 0 18 0;
+#X connect 20 0 21 0;
+#X connect 20 1 23 0;
+#X connect 21 0 22 1;
+#X connect 22 0 11 0;
+#X connect 23 0 24 0;
+#X connect 23 1 25 0;
+#X connect 24 0 11 1;
+#X connect 24 0 19 0;
+#X connect 25 0 22 1;
 #X restore 369 344 pd release-command;
 #X obj 636 340 until;
 #X obj 636 392 f;

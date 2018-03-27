@@ -1,5 +1,4 @@
-#N canvas 375 321 818 556 10;
-#X declare -path ./lib;
+#N canvas 268 226 818 556 10;
 #N canvas 576 84 627 531 preset-duration-playback 0;
 #X obj 54 439 outlet;
 #X obj 54 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
@@ -72,7 +71,6 @@ used with [timeStretch~] should be at the same sampling rate.;
 #X connect 3 0 0 0;
 #X connect 4 0 0 0;
 #X restore 547 409 pd load-samples;
-#X obj 547 429 declare -path ./lib;
 #N canvas 665 198 657 556 keyboard 0;
 #X obj 51 495 outlet;
 #X obj 51 50 notein;
@@ -387,10 +385,10 @@ the difficulties of time stretching transients.;
 #X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
 when a voice has finished playback;
 #X text 545 469 [timeStretch~] version 0.1;
-#X connect 0 0 13 0;
-#X connect 1 0 13 0;
-#X connect 4 0 13 0;
-#X connect 8 0 13 0;
-#X connect 9 0 13 0;
-#X connect 13 0 5 0;
-#X connect 13 1 12 0;
+#X connect 0 0 12 0;
+#X connect 1 0 12 0;
+#X connect 3 0 12 0;
+#X connect 7 0 12 0;
+#X connect 8 0 12 0;
+#X connect 12 0 4 0;
+#X connect 12 1 11 0;
