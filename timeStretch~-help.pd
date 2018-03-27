@@ -384,7 +384,7 @@ the difficulties of time stretching transients.;
 #X text 213 327 outlet 1: output signal;
 #X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
 when a voice has finished playback;
-#X text 545 469 [timeStretch~] version 0.1;
+#X text 545 469 [timeStretch~] version 0.1.1;
 #X connect 0 0 12 0;
 #X connect 1 0 12 0;
 #X connect 3 0 12 0;
