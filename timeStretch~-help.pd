@@ -210,8 +210,7 @@ commands to specific targeted voices.;
 #X restore 58 425 pd output;
 #X obj 41 334 cnv 15 130 60 empty empty empty 20 12 0 14 -228856 -66577
 0;
-#X text 545 489 William Brent \, March 2018;
-#N canvas 162 76 940 594 attack-release-playback-basics 0;
+#N canvas 438 93 907 609 attack-release-playback-basics 0;
 #X msg 147 228 bend 0 \$1;
 #X obj 57 538 outlet;
 #X floatatom 97 148 5 0 100 1 % - -, f 5;
@@ -246,7 +245,10 @@ number of ms while the sample plays toward the end from its current
 playhead position at normal speed. If the specified release time is
 longer than the remaining duration of the sample \, the fade out will
 occur over the remaining duration instead.;
-#X msg 57 88 attack 0 \$1-piano 94 0 500;
+#X msg 57 88 attack 0 \$1-piano;
+#X text 613 54 NOTE: once an "attack" message is sent \, all subsequent
+"attack" messages are ignored until a "release" message is sent.,
+f 24;
 #X connect 0 0 1 0;
 #X connect 2 0 12 0;
 #X connect 3 0 0 0;
@@ -263,7 +265,7 @@ occur over the remaining duration instead.;
 #X connect 19 0 1 0;
 #X connect 22 0 1 0;
 #X restore 78 65 pd attack-release-playback-basics;
-#N canvas 325 44 760 709 attack-release-playback-more 0;
+#N canvas 325 44 1020 703 attack-release-playback-more 0;
 #X obj 54 635 outlet;
 #X floatatom 117 196 5 0 100 1 % - -, f 5;
 #X floatatom 455 417 5 0 100 1 % - -, f 5;
@@ -326,9 +328,9 @@ occur over the remaining duration instead.;
 #X obj 423 253 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 423 273 f \$0;
-#X obj 485 488 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 625 508 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 485 508 f \$0;
+#X obj 625 528 f \$0;
 #X msg 117 217 playhead 0 \$1;
 #X msg 455 448 playhead 1 \$1;
 #X msg 167 334 release 0 500;
@@ -337,7 +339,18 @@ convert it to percent so that you can set the starting position of
 the playhead control if you'd like to move forward or back after the
 onset occurs., f 42;
 #X msg 423 295 attack 1 \$1-voice 94 0 250;
-#X msg 485 528 release 1 -1;
+#X msg 625 548 release 1 -1;
+#X msg 515 538 pause 1;
+#X msg 485 478 continue 1 20;
+#X msg 495 498 continue 1 -5;
+#X text 719 480 \$1: voice ID (0-15) \; \$2: playback speed (%) \;
+;
+#X text 719 450 "continue" command arguments:;
+#X text 769 540 "pause" command arguments:;
+#X text 769 570 \$1: voice ID (0-15) \;;
+#X text 625 340 After an "attack" message \, you can also send "continue"
+and "pause" messages to freely resume or pause playback as many times
+as you like. Forward or reverse playback is possible., f 30;
 #X connect 1 0 23 0;
 #X connect 2 0 24 0;
 #X connect 3 0 5 0;
@@ -367,6 +380,9 @@ onset occurs., f 42;
 #X connect 25 0 0 0;
 #X connect 27 0 10 0;
 #X connect 28 0 0 0;
+#X connect 29 0 0 0;
+#X connect 30 0 0 0;
+#X connect 31 0 0 0;
 #X restore 96 87 pd attack-release-playback-more;
 #X text 377 163 I especially like it for sustaining percussive samples
 indefinitely. The "attack" command starts playback at regular speed
@@ -384,11 +400,15 @@ the difficulties of time stretching transients.;
 #X text 213 327 outlet 1: output signal;
 #X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
 when a voice has finished playback;
-#X text 545 469 [timeStretch~] version 0.1.1;
-#X connect 0 0 12 0;
-#X connect 1 0 12 0;
-#X connect 3 0 12 0;
-#X connect 7 0 12 0;
-#X connect 8 0 12 0;
-#X connect 12 0 4 0;
-#X connect 12 1 11 0;
+#X text 545 469 [timeStretch~] version 0.1.2;
+#X text 545 489 William Brent \, April 2018;
+#X text 381 269 Bend \, amp \, coneinue \, pause \, and playhead commands
+should all be blocked if tabread \$0-timestretch-attack-active-flags
+for that voice is 0 Easily done with a spigot and table lookup.;
+#X connect 0 0 11 0;
+#X connect 1 0 11 0;
+#X connect 3 0 11 0;
+#X connect 6 0 11 0;
+#X connect 7 0 11 0;
+#X connect 11 0 4 0;
+#X connect 11 1 10 0;
