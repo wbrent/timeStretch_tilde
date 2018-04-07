@@ -210,12 +210,12 @@ commands to specific targeted voices.;
 #X restore 58 425 pd output;
 #X obj 41 334 cnv 15 130 60 empty empty empty 20 12 0 14 -228856 -66577
 0;
-#N canvas 438 93 907 609 attack-release-playback-basics 0;
+#N canvas 458 109 907 609 attack-release-playback-basics 0;
 #X msg 147 228 bend 0 \$1;
 #X obj 57 538 outlet;
 #X floatatom 97 148 5 0 100 1 % - -, f 5;
 #X floatatom 147 208 5 0 0 1 cents - -, f 5;
-#X floatatom 197 268 5 0 0 1 dB - -, f 5;
+#X floatatom 197 268 5 0 100 1 dB - -, f 5;
 #X msg 197 288 amp 0 \$1;
 #X obj 57 48 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -245,17 +245,17 @@ number of ms while the sample plays toward the end from its current
 playhead position at normal speed. If the specified release time is
 longer than the remaining duration of the sample \, the fade out will
 occur over the remaining duration instead.;
-#X msg 57 88 attack 0 \$1-piano;
 #X text 613 54 NOTE: once an "attack" message is sent \, all subsequent
 "attack" messages are ignored until a "release" message is sent.,
 f 24;
+#X msg 57 88 attack 0 \$1-piano 94 0 250;
 #X connect 0 0 1 0;
 #X connect 2 0 12 0;
 #X connect 3 0 0 0;
 #X connect 4 0 5 0;
 #X connect 5 0 1 0;
 #X connect 6 0 7 0;
-#X connect 7 0 22 0;
+#X connect 7 0 23 0;
 #X connect 8 0 9 0;
 #X connect 9 0 13 0;
 #X connect 12 0 1 0;
@@ -263,9 +263,9 @@ f 24;
 #X connect 17 0 18 0;
 #X connect 18 0 19 0;
 #X connect 19 0 1 0;
-#X connect 22 0 1 0;
+#X connect 23 0 1 0;
 #X restore 78 65 pd attack-release-playback-basics;
-#N canvas 325 44 1020 703 attack-release-playback-more 0;
+#N canvas 580 76 1020 703 attack-release-playback-more 0;
 #X obj 54 635 outlet;
 #X floatatom 117 196 5 0 100 1 % - -, f 5;
 #X floatatom 455 417 5 0 100 1 % - -, f 5;
@@ -396,19 +396,16 @@ results. [timeStretch~] adds functionality for changing sample arrays
 on the fly \, 16-voice polyphony \, and has commands designed for navigating
 the difficulties of time stretching transients.;
 #X obj 225 408 print;
-#X obj 58 355 timeStretch~;
 #X text 213 327 outlet 1: output signal;
 #X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
 when a voice has finished playback;
 #X text 545 469 [timeStretch~] version 0.1.2;
 #X text 545 489 William Brent \, April 2018;
-#X text 381 269 Bend \, amp \, coneinue \, pause \, and playhead commands
-should all be blocked if tabread \$0-timestretch-attack-active-flags
-for that voice is 0 Easily done with a spigot and table lookup.;
-#X connect 0 0 11 0;
-#X connect 1 0 11 0;
-#X connect 3 0 11 0;
-#X connect 6 0 11 0;
-#X connect 7 0 11 0;
-#X connect 11 0 4 0;
-#X connect 11 1 10 0;
+#X obj 58 355 timeStretch~;
+#X connect 0 0 15 0;
+#X connect 1 0 15 0;
+#X connect 3 0 15 0;
+#X connect 6 0 15 0;
+#X connect 7 0 15 0;
+#X connect 15 0 4 0;
+#X connect 15 1 10 0;
