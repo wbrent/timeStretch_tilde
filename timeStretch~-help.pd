@@ -1,5 +1,5 @@
 #N canvas 255 130 818 654 10;
-#N canvas 816 81 627 531 preset-duration-playback 1;
+#N canvas 784 277 601 532 preset-duration-playback 0;
 #X obj 54 439 outlet;
 #X obj 54 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -18,27 +18,29 @@
 \$3: desired duration (ms) \; \$4: amplitude (dB) \; \$5: transposition
 (cents) \; \$6: onset duration (ms) \; \$7: release time (% of duration)
 \;;
-#X msg 136 250 play 2 \$1-voice 5000 100 -300 1000 5;
 #X msg 163 339 play 3 \$1-voice 4000 90 300 1150 0;
 #X msg 87 177 play 1 \$1-piano 10000 94 300 300 0;
 #X msg 54 107 play 0 \$1-piano 2000 94 0 250 10;
 #X text 289 378 stop playback in a given voice early;
-#X msg 220 378 stop 1;
+#X msg 220 377 stop 2;
+#X msg 216 403 stop 3;
+#X msg 136 250 play 2 \$1-voice 5000 100 0 1000 5;
 #X connect 1 0 2 0;
-#X connect 2 0 14 0;
+#X connect 2 0 13 0;
 #X connect 3 0 4 0;
-#X connect 4 0 13 0;
+#X connect 4 0 12 0;
 #X connect 5 0 6 0;
-#X connect 6 0 11 0;
+#X connect 6 0 17 0;
 #X connect 7 0 8 0;
-#X connect 8 0 12 0;
+#X connect 8 0 11 0;
 #X connect 11 0 0 0;
 #X connect 12 0 0 0;
 #X connect 13 0 0 0;
-#X connect 14 0 0 0;
+#X connect 15 0 0 0;
 #X connect 16 0 0 0;
+#X connect 17 0 0 0;
 #X restore 58 26 pd preset-duration-playback;
-#N canvas 587 516 654 345 settings 0;
+#N canvas 41 581 658 345 settings 0;
 #X msg 44 126 window-size \$1;
 #X msg 44 31 512;
 #X msg 64 51 1024;
@@ -50,12 +52,14 @@
 are at a different sampling rate \, you can set it here. All samples
 used with [timeStretch~] should be at the same sampling rate.;
 #X text 165 53 Internal default is 2048;
+#X msg 91 182 samplerate 44100;
 #X connect 0 0 5 0;
 #X connect 1 0 0 0;
 #X connect 2 0 0 0;
 #X connect 3 0 0 0;
 #X connect 4 0 0 0;
 #X connect 6 0 5 0;
+#X connect 9 0 5 0;
 #X restore 186 237 pd settings;
 #N canvas 699 366 671 289 load-samples 0;
 #X obj 295 185 soundfiler;
@@ -269,7 +273,7 @@ f 24;
 #X obj 54 635 outlet;
 #X floatatom 117 196 5 0 100 1 % - -;
 #X floatatom 455 417 5 0 100 1 % - -;
-#N canvas 681 51 594 326 ms-to-percent 0;
+#N canvas 1130 41 594 326 ms-to-percent 0;
 #X obj 61 8 inlet;
 #X obj 61 30 t f b;
 #X obj 139 118 / 44.1;
@@ -410,7 +414,7 @@ when a voice has finished playback;
 #X obj 88 133 hsl 64 10 0 100 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 88 153 hsl 64 10 0 100 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 6300 1;
+-1 -1 0 1;
 #X obj 88 173 hsl 64 10 0 100 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 88 193 hsl 64 10 0 100 0 0 empty empty empty -2 -8 0 10 -262144
