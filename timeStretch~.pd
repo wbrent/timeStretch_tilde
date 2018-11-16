@@ -1,4 +1,4 @@
-#N canvas 638 255 663 344 10;
+#N canvas 620 348 685 313 10;
 #X declare -path ./lib;
 #X obj 37 254 outlet~;
 #X obj 37 230 hip~ 5;
@@ -12,20 +12,19 @@
 #X obj 619 153 list;
 #X obj 619 173 list trim;
 #X obj 709 153 makefilename \$0-timestretch-%s;
-#N canvas 49 366 712 533 play-command 0;
+#N canvas 385 361 712 533 play-command 0;
 #X obj 43 47 inlet;
 #X obj 43 375 list append \$0;
 #X msg 43 416 \; \$6-timestretch-\$1-rewind bang \; \$6-timestretch-\$1-tablename
 \$2 \; \$6-timestretch-\$1-speed \$3 \; \$6-timestretch-\$1-gain \$4
 \; \$6-timestretch-\$1-transpo \$5 \;;
-#N canvas 840 463 635 532 duration-to-speed 0;
+#N canvas 774 427 635 532 duration-to-speed 0;
 #X obj 147 35 inlet;
 #X obj 37 425 outlet;
 #X obj 37 399 pack f s f f f;
 #X obj 147 76 unpack f s f f f f f f;
 #X text 212 28 player voice ID \, sample table symbol \, samplerate
 \, duration \, gain \, transpo \, onset duration \, release %;
-#X obj 280 355 pack f f f f f \$0 f;
 #X text 19 457 tablereader voice ID \, sample table symbol \, speed
 \, gain \, transpo, f 30;
 #N canvas 1541 48 359 374 calc-sustain-release-times 0;
@@ -39,8 +38,8 @@
 #X obj 55 213 -;
 #X obj 70 61 r \$0-ts-play-onset-dur;
 #X obj 55 39 r \$0-ts-play-dur;
-#X floatatom 180 212 10 0 0 3 release-time - -, f 10;
-#X floatatom 103 311 10 0 0 3 sustain-time - -, f 10;
+#X floatatom 180 212 10 0 0 3 release-time - -;
+#X floatatom 103 311 10 0 0 3 sustain-time - -;
 #X connect 2 0 5 0;
 #X connect 3 0 6 0;
 #X connect 4 0 7 1;
@@ -53,13 +52,13 @@
 #X connect 7 0 11 0;
 #X connect 8 0 3 1;
 #X connect 9 0 3 0;
-#X restore 335 295 pd calc-sustain-release-times;
+#X restore 335 265 pd calc-sustain-release-times;
 #X obj 266 146 s \$0-ts-play-dur;
 #X obj 286 126 s \$0-ts-play-onset-dur;
 #X obj 306 106 s \$0-ts-play-release;
-#X obj 317 275 r \$0-ts-play-onset-dur;
+#X obj 317 245 r \$0-ts-play-onset-dur;
 #X obj 246 166 s \$0-ts-play-sr;
-#X obj 391 315 r \$0-ts-play-sr;
+#X obj 391 285 r \$0-ts-play-sr;
 #N canvas 919 92 686 573 calc-speed 0;
 #X obj 202 492 outlet;
 #X obj 202 100 /;
@@ -84,11 +83,11 @@
 1;
 #X obj 252 413 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X floatatom 19 158 10 0 0 3 sample-dur-ms - -, f 10;
-#X floatatom 19 268 10 0 0 3 post-onset-playback-dur - -, f 10;
-#X floatatom 19 368 10 0 0 3 play-speed-factor - -, f 10;
-#X floatatom 390 458 10 0 0 3 play-speed-percent - -, f 10;
-#X floatatom 19 458 10 0 0 0 - - -, f 10;
+#X floatatom 19 158 10 0 0 3 sample-dur-ms - -;
+#X floatatom 19 268 10 0 0 3 post-onset-playback-dur - -;
+#X floatatom 19 368 10 0 0 3 play-speed-factor - -;
+#X floatatom 390 458 10 0 0 3 play-speed-percent - -;
+#X floatatom 19 458 10 0 0 0 - - -;
 #X obj 257 240 -;
 #X obj 479 188 r \$0-ts-play-onset-dur;
 #X obj 272 212 r \$0-ts-play-onset-dur;
@@ -100,7 +99,7 @@
 #X text 512 353 If there's an onset duration specified \, send a 100%
 play speed value first \, then output the play speed that will occur
 post-onset out the right outlet, f 17;
-#X floatatom 19 198 10 0 0 3 sample-dur-post-onset-ms - -, f 10;
+#X floatatom 19 198 10 0 0 3 sample-dur-post-onset-ms - -;
 #X obj 202 143 -;
 #X obj 232 143 r \$0-ts-play-onset-dur;
 #X connect 1 0 8 0;
@@ -148,35 +147,35 @@ post-onset out the right outlet, f 17;
 #X obj 226 186 s \$0-ts-play-sample;
 #X obj 63 310 r \$0-ts-play-sample;
 #X obj 206 206 s \$0-ts-play-voice;
-#X obj 37 202 t f b;
 #X obj 37 172 r \$0-ts-play-voice;
-#X obj 298 255 r \$0-ts-play-voice;
+#X obj 280 355 pack f f f f f \$0 f;
+#X obj 37 202 t f b f;
 #X msg 280 379 \; \; \$6-timestretch-\$2-bend 0 \; \$6-timestretch-\$2-samplerate
 \$7 \; \$6-timestretch-\$2-onset-dur \$3 \; \$6-timestretch-\$2-speed-post-onset
 \$1 \; \$6-timestretch-\$2-sustain-time \$4 \; \$6-timestretch-\$2-release-time
 \$5 \;;
 #X connect 0 0 3 0;
 #X connect 2 0 1 0;
-#X connect 3 0 17 0;
-#X connect 3 1 15 0;
-#X connect 3 2 12 0;
-#X connect 3 3 8 0;
+#X connect 3 0 16 0;
+#X connect 3 1 14 0;
+#X connect 3 2 11 0;
+#X connect 3 3 7 0;
 #X connect 3 4 2 3;
 #X connect 3 5 2 4;
-#X connect 3 6 9 0;
-#X connect 3 7 10 0;
-#X connect 5 0 21 0;
-#X connect 7 0 5 3;
-#X connect 7 1 5 4;
-#X connect 11 0 5 2;
-#X connect 13 0 5 6;
-#X connect 14 0 2 2;
-#X connect 14 1 5 0;
-#X connect 16 0 2 1;
-#X connect 18 0 2 0;
-#X connect 18 1 14 0;
-#X connect 19 0 18 0;
-#X connect 20 0 5 1;
+#X connect 3 6 8 0;
+#X connect 3 7 9 0;
+#X connect 6 0 18 3;
+#X connect 6 1 18 4;
+#X connect 10 0 18 2;
+#X connect 12 0 18 6;
+#X connect 13 0 2 2;
+#X connect 13 1 18 0;
+#X connect 15 0 2 1;
+#X connect 17 0 19 0;
+#X connect 18 0 20 0;
+#X connect 19 0 2 0;
+#X connect 19 1 13 0;
+#X connect 19 2 18 1;
 #X restore 43 282 pd duration-to-speed;
 #X text 162 370 tablereader voice ID \, sample table symbol \, speed
 \, gain \, transpo \, dollar-zero;
@@ -209,7 +208,7 @@ all voices get the same samplerate anyway \, so it's global., f 55
 #N canvas 415 310 618 569 attack-command 0;
 #X obj 36 19 inlet;
 #X obj 36 417 list append \$0;
-#N canvas 47 266 818 399 duration-to-speed 0;
+#N canvas 496 489 818 399 duration-to-speed 0;
 #X obj 147 35 inlet;
 #X obj 125 314 outlet;
 #X obj 48 142 symbol;
@@ -297,7 +296,7 @@ bang \; \$5-timestretch-\$1-tablename \$2 \; \$5-timestretch-\$1-speed
 #X obj 40 39 inlet;
 #X obj 110 161 swap 1;
 #X obj 110 182 -;
-#X obj 90 230 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 90 230 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X connect 0 0 1 0;
 #X connect 0 1 2 0;
@@ -326,7 +325,7 @@ bang \; \$5-timestretch-\$1-tablename \$2 \; \$5-timestretch-\$1-speed
 #X obj 36 19 inlet;
 #X obj 36 417 list append \$0;
 #X msg 36 458 \; \$3-timestretch-\$1-location \$2 \;;
-#N canvas 89 171 681 468 location-percent-to-ms 0;
+#N canvas 459 204 681 468 location-percent-to-ms 0;
 #X obj 147 35 inlet;
 #X obj 148 298 /;
 #X obj 148 320 * 1000;
@@ -432,8 +431,8 @@ time (ms);
 #X text 120 432 voiceID \, name of table \, file samplerate \, release
 time (ms);
 #X obj 139 580 unpack f f;
-#X floatatom 221 604 5 0 0 0 - - -, f 5;
-#X floatatom 139 602 5 0 0 0 - - -, f 5;
+#X floatatom 221 604 5 0 0 0 - - -;
+#X floatatom 139 602 5 0 0 0 - - -;
 #X text 262 468 This should really check to see how much time is left
 based on the current playhead position \, and time stretch so that
 it plays to the end of the file in exactly the number of (ms) requested
@@ -473,7 +472,7 @@ the samplerate for voice 0;
 #X obj 130 130 t f f f;
 #X obj 40 301 outlet;
 #X obj 40 39 inlet;
-#X obj 90 280 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 90 280 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X connect 0 0 1 0;
 #X connect 0 1 2 0;
@@ -494,7 +493,7 @@ the samplerate for voice 0;
 #X connect 11 2 10 1;
 #X connect 13 0 0 0;
 #X restore 36 52 pd filter-out-unnecessary-releases;
-#X obj 86 275 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 86 275 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X connect 0 0 27 0;
 #X connect 1 0 3 0;
@@ -543,7 +542,7 @@ the samplerate for voice 0;
 #X obj 111 57 t l l;
 #X obj 111 138 spigot;
 #X obj 144 87 unpack f f;
-#X obj 166 138 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 166 138 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X connect 0 0 4 0;
 #X connect 1 0 2 0;
@@ -562,7 +561,7 @@ the samplerate for voice 0;
 #X obj 144 87 unpack f f;
 #X obj 111 190 list append \$0;
 #X msg 111 212 \; \$3-timestretch-\$1-gain \$2 \;;
-#X obj 169 136 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 169 136 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X connect 0 0 2 0;
 #X connect 1 0 3 1;
@@ -575,8 +574,6 @@ the samplerate for voice 0;
 #X restore 689 314 pd amp-command;
 #X obj 992 88 f;
 #X obj 1042 88 r \$0-timestretch-num-voices;
-#X msg 619 50 num-voices 16 \, window-size 2048 \, samplerate 44100
-;
 #X obj 619 20 r \$0-ts-lb1;
 #N canvas 435 120 556 421 stop-command 0;
 #X obj 111 36 inlet;
@@ -631,7 +628,13 @@ bend amp;
 #X connect 4 0 1 0;
 #X connect 5 0 6 0;
 #X restore 449 374 pd pause-command;
-#X connect 0 0 34 0;
+#X msg 619 50 num-voices 16 \, window-size 2048 \, samplerate 44100
+\, pd-samplerate 44100;
+#X msg 135 71 \; \$2-timestretch-pd-samplerate \$1 \;;
+#X obj 135 31 samplerate~;
+#X obj 49 81 t a b;
+#X obj 135 52 pack f \$0;
+#X connect 0 0 38 0;
 #X connect 1 0 2 0;
 #X connect 1 1 5 1;
 #X connect 2 0 5 0;
@@ -652,22 +655,26 @@ bend amp;
 #X connect 19 0 16 0;
 #X connect 23 0 12 0;
 #X connect 24 0 23 1;
-#X connect 25 0 1 0;
-#X connect 26 0 25 0;
+#X connect 25 0 35 0;
+#X connect 29 0 30 0;
 #X connect 30 0 31 0;
-#X connect 31 0 32 0;
-#X connect 34 0 8 0;
-#X connect 34 1 27 0;
-#X connect 34 2 9 0;
-#X connect 34 3 10 0;
-#X connect 34 4 33 0;
-#X connect 34 5 35 0;
-#X connect 34 6 11 0;
-#X connect 34 7 21 0;
-#X connect 34 8 22 0;
-#X connect 34 9 1 0;
+#X connect 33 0 8 0;
+#X connect 33 1 26 0;
+#X connect 33 2 9 0;
+#X connect 33 3 10 0;
+#X connect 33 4 32 0;
+#X connect 33 5 34 0;
+#X connect 33 6 11 0;
+#X connect 33 7 21 0;
+#X connect 33 8 22 0;
+#X connect 33 9 1 0;
+#X connect 35 0 1 0;
+#X connect 37 0 39 0;
+#X connect 38 0 33 0;
+#X connect 38 1 37 0;
+#X connect 39 0 36 0;
 #X restore 37 78 pd command-parsing;
-#X obj 462 247 declare -path ./lib;
+#X obj 233 74 declare -path ./lib;
 #N canvas 647 119 793 726 FFT-analysis 0;
 #X obj 46 634 *~;
 #X obj 237 303 rfft~;
@@ -708,7 +715,7 @@ bend amp;
 #X obj 69 93 +~;
 #X obj 69 117 sqrt~;
 #X obj 142 22 inlet~;
-#X obj 69 140 +~ 1e-20;
+#X obj 69 140 +~ 1e-020;
 #X obj 69 163 outlet~;
 #X connect 0 0 2 0;
 #X connect 0 0 2 1;
@@ -720,7 +727,7 @@ bend amp;
 #X connect 5 0 1 1;
 #X connect 6 0 7 0;
 #X restore 88 75 pd get-mag;
-#X obj 46 258 +~ 1e-15;
+#X obj 46 258 +~ 1e-015;
 #N canvas 1087 158 561 795 comments 0;
 #X text 43 33 Whatever the previous frame's analysis values were \,
 normalize them by dividing by the magnitude. This gives all of the
@@ -1003,16 +1010,19 @@ the conjugate of the back window., f 27;
 #X connect 1 1 5 0;
 #X connect 1 2 4 0;
 #X connect 1 3 3 0;
-#X restore 462 227 pd init;
-#X obj 197 254 outlet;
-#X obj 197 184 r \$0-timestretch-note-off-feedback;
-#X obj 197 205 list prepend note-off;
-#X obj 197 226 list trim;
-#X text 460 273 [timeStretch~] version 0.1.2;
-#X text 460 293 William Brent \, April 2018;
+#X restore 233 54 pd init;
+#X obj 437 254 outlet;
+#X obj 437 184 r \$0-timestretch-note-off-feedback;
+#X obj 437 205 list prepend note-off;
+#X obj 437 226 list trim;
+#X obj 157 233 r \$0-timestretch-omni-location-current;
+#X obj 157 254 outlet;
+#X text 231 120 William Brent \, November 2018;
+#X text 231 100 [timeStretch~] version 0.2;
 #X connect 1 0 0 0;
 #X connect 2 0 3 0;
 #X connect 5 0 1 0;
 #X connect 8 0 9 0;
 #X connect 9 0 10 0;
 #X connect 10 0 7 0;
+#X connect 11 0 12 0;
