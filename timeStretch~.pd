@@ -79,7 +79,7 @@
 #X obj 257 264 max 0;
 #X obj 479 233 == 0;
 #X obj 479 208 max 0;
-#X obj 466 349 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 466 349 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 252 413 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
@@ -715,7 +715,7 @@ bend amp;
 #X obj 69 93 +~;
 #X obj 69 117 sqrt~;
 #X obj 142 22 inlet~;
-#X obj 69 140 +~ 1e-020;
+#X obj 69 140 +~ 1e-20;
 #X obj 69 163 outlet~;
 #X connect 0 0 2 0;
 #X connect 0 0 2 1;
@@ -727,7 +727,7 @@ bend amp;
 #X connect 5 0 1 1;
 #X connect 6 0 7 0;
 #X restore 88 75 pd get-mag;
-#X obj 46 258 +~ 1e-015;
+#X obj 46 258 +~ 1e-15;
 #N canvas 1087 158 561 795 comments 0;
 #X text 43 33 Whatever the previous frame's analysis values were \,
 normalize them by dividing by the magnitude. This gives all of the

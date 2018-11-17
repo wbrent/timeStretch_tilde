@@ -1,44 +1,48 @@
 #N canvas 255 130 818 654 10;
 #N canvas 784 277 601 532 preset-duration-playback 0;
-#X obj 54 439 outlet;
-#X obj 54 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#X obj 54 479 outlet;
+#X obj 54 47 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 54 87 f \$0;
-#X obj 87 137 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#X obj 54 67 f \$0;
+#X obj 87 117 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 87 157 f \$0;
-#X obj 136 210 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 87 137 f \$0;
+#X obj 136 190 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 136 230 f \$0;
-#X obj 163 299 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 136 210 f \$0;
+#X obj 163 279 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 163 319 f \$0;
-#X text 335 49 "play" command arguments:;
-#X text 335 79 \$1: voice number (0-15) \; \$2: sample array name \;
+#X obj 163 299 f \$0;
+#X text 335 29 "play" command arguments:;
+#X text 335 59 \$1: voice number (0-15) \; \$2: sample array name \;
 \$3: desired duration (ms) \; \$4: amplitude (dB) \; \$5: transposition
 (cents) \; \$6: onset duration (ms) \; \$7: release time (% of duration)
 \;;
-#X msg 163 339 play 3 \$1-voice 4000 90 300 1150 0;
-#X msg 87 177 play 1 \$1-piano 10000 94 300 300 0;
-#X msg 54 107 play 0 \$1-piano 2000 94 0 250 10;
-#X text 289 378 stop playback in a given voice early;
-#X msg 220 377 stop 2;
-#X msg 216 403 stop 3;
-#X msg 136 250 play 2 \$1-voice 5000 100 0 1000 5;
+#X msg 163 319 play 3 \$1-voice 4000 90 300 1150 0;
+#X msg 87 157 play 1 \$1-piano 10000 94 300 300 0;
+#X text 289 358 stop playback in a given voice early;
+#X msg 240 397 stop 2;
+#X msg 250 417 stop 3;
+#X msg 220 357 stop 0;
+#X msg 54 87 play 0 \$1-piano 200000 94 0 250 10;
+#X msg 136 230 play 2 \$1-voice 5000 100 -300 1000 5;
+#X msg 230 377 stop 1;
 #X connect 1 0 2 0;
-#X connect 2 0 13 0;
+#X connect 2 0 17 0;
 #X connect 3 0 4 0;
 #X connect 4 0 12 0;
 #X connect 5 0 6 0;
-#X connect 6 0 17 0;
+#X connect 6 0 18 0;
 #X connect 7 0 8 0;
 #X connect 8 0 11 0;
 #X connect 11 0 0 0;
 #X connect 12 0 0 0;
-#X connect 13 0 0 0;
+#X connect 14 0 0 0;
 #X connect 15 0 0 0;
 #X connect 16 0 0 0;
 #X connect 17 0 0 0;
+#X connect 18 0 0 0;
+#X connect 19 0 0 0;
 #X restore 58 26 pd preset-duration-playback;
 #N canvas 41 581 658 345 settings 0;
 #X msg 44 126 window-size \$1;
@@ -203,6 +207,8 @@ commands to specific targeted voices.;
 #X obj 380 217 pack f 40;
 #X obj 380 239 line~;
 #X obj 306 126 inlet~;
+#X obj 173 16 loadbang;
+#X msg 173 37 90;
 #X connect 0 0 1 0;
 #X connect 0 0 1 1;
 #X connect 2 0 3 0;
@@ -210,11 +216,13 @@ commands to specific targeted voices.;
 #X connect 4 0 5 0;
 #X connect 5 0 0 1;
 #X connect 6 0 0 0;
+#X connect 7 0 8 0;
+#X connect 8 0 2 0;
 #X coords 0 -1 1 1 100 40 1 100 100;
 #X restore 58 425 pd output;
 #X obj 41 334 cnv 15 130 60 empty empty empty 20 12 0 14 -228856 -66577
 0;
-#N canvas 918 56 907 609 attack-release-playback-basics 0;
+#N canvas 521 50 907 609 attack-release-playback-basics 0;
 #X msg 147 228 bend 0 \$1;
 #X obj 57 538 outlet;
 #X floatatom 97 148 5 0 100 1 % - -;
@@ -269,7 +277,7 @@ f 24;
 #X connect 19 0 1 0;
 #X connect 23 0 1 0;
 #X restore 78 65 pd attack-release-playback-basics;
-#N canvas 580 76 1020 703 attack-release-playback-more 0;
+#N canvas 586 123 1020 703 attack-release-playback-more 0;
 #X obj 54 635 outlet;
 #X floatatom 117 196 5 0 100 1 % - -;
 #X floatatom 455 417 5 0 100 1 % - -;
@@ -343,7 +351,6 @@ convert it to percent so that you can set the starting position of
 the playhead control if you'd like to move forward or back after the
 onset occurs., f 42;
 #X msg 423 295 attack 1 \$1-voice 94 0 250;
-#X msg 625 548 release 1 -1;
 #X msg 515 538 pause 1;
 #X msg 485 478 continue 1 20;
 #X msg 495 498 continue 1 -5;
@@ -355,6 +362,7 @@ onset occurs., f 42;
 #X text 625 340 After an "attack" message \, you can also send "continue"
 and "pause" messages to freely resume or pause playback as many times
 as you like. Forward or reverse playback is possible., f 30;
+#X msg 625 548 release 1 -1;
 #X connect 1 0 23 0;
 #X connect 2 0 24 0;
 #X connect 3 0 5 0;
@@ -378,7 +386,7 @@ as you like. Forward or reverse playback is possible., f 30;
 #X connect 19 0 20 0;
 #X connect 20 0 27 0;
 #X connect 21 0 22 0;
-#X connect 22 0 28 0;
+#X connect 22 0 36 0;
 #X connect 23 0 0 0;
 #X connect 24 0 0 0;
 #X connect 25 0 0 0;
@@ -386,7 +394,7 @@ as you like. Forward or reverse playback is possible., f 30;
 #X connect 28 0 0 0;
 #X connect 29 0 0 0;
 #X connect 30 0 0 0;
-#X connect 31 0 0 0;
+#X connect 36 0 0 0;
 #X restore 96 87 pd attack-release-playback-more;
 #X text 377 163 I especially like it for sustaining percussive samples
 indefinitely. The "attack" command starts playback at regular speed
