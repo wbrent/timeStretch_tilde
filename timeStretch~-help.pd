@@ -24,15 +24,15 @@
 #X msg 240 397 stop 2;
 #X msg 250 417 stop 3;
 #X msg 220 357 stop 0;
-#X msg 54 87 play 0 \$1-piano 200000 94 0 250 10;
 #X msg 136 230 play 2 \$1-voice 5000 100 -300 1000 5;
 #X msg 230 377 stop 1;
+#X msg 54 87 play 0 \$1-piano 2000 94 0 250 10;
 #X connect 1 0 2 0;
-#X connect 2 0 17 0;
+#X connect 2 0 19 0;
 #X connect 3 0 4 0;
 #X connect 4 0 12 0;
 #X connect 5 0 6 0;
-#X connect 6 0 18 0;
+#X connect 6 0 17 0;
 #X connect 7 0 8 0;
 #X connect 8 0 11 0;
 #X connect 11 0 0 0;
