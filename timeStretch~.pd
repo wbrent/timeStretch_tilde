@@ -22,8 +22,8 @@
 #X obj 147 35 inlet;
 #X obj 37 425 outlet;
 #X obj 37 399 pack f s f f f;
-#X obj 147 76 unpack f s f f f f f f;
-#X text 212 28 player voice ID \, sample table symbol \, samplerate
+#X obj 147 56 unpack f s f f f f f f;
+#X text 212 18 player voice ID \, sample table symbol \, samplerate
 \, duration \, gain \, transpo \, onset duration \, release %;
 #X text 19 457 tablereader voice ID \, sample table symbol \, speed
 \, gain \, transpo, f 30;
@@ -79,7 +79,7 @@
 #X obj 257 264 max 0;
 #X obj 479 233 == 0;
 #X obj 479 208 max 0;
-#X obj 466 349 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 466 349 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 252 413 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
@@ -154,6 +154,7 @@ post-onset out the right outlet, f 17;
 \$7 \; \$6-timestretch-\$2-onset-dur \$3 \; \$6-timestretch-\$2-speed-post-onset
 \$1 \; \$6-timestretch-\$2-sustain-time \$4 \; \$6-timestretch-\$2-release-time
 \$5 \;;
+#X obj 306 86 clip 0 100;
 #X connect 0 0 3 0;
 #X connect 2 0 1 0;
 #X connect 3 0 16 0;
@@ -163,7 +164,7 @@ post-onset out the right outlet, f 17;
 #X connect 3 4 2 3;
 #X connect 3 5 2 4;
 #X connect 3 6 8 0;
-#X connect 3 7 9 0;
+#X connect 3 7 21 0;
 #X connect 6 0 18 3;
 #X connect 6 1 18 4;
 #X connect 10 0 18 2;
@@ -176,6 +177,7 @@ post-onset out the right outlet, f 17;
 #X connect 19 0 2 0;
 #X connect 19 1 13 0;
 #X connect 19 2 18 1;
+#X connect 21 0 9 0;
 #X restore 43 282 pd duration-to-speed;
 #X text 162 370 tablereader voice ID \, sample table symbol \, speed
 \, gain \, transpo \, dollar-zero;
@@ -715,7 +717,7 @@ bend amp;
 #X obj 69 93 +~;
 #X obj 69 117 sqrt~;
 #X obj 142 22 inlet~;
-#X obj 69 140 +~ 1e-20;
+#X obj 69 140 +~ 1e-020;
 #X obj 69 163 outlet~;
 #X connect 0 0 2 0;
 #X connect 0 0 2 1;
@@ -727,7 +729,7 @@ bend amp;
 #X connect 5 0 1 1;
 #X connect 6 0 7 0;
 #X restore 88 75 pd get-mag;
-#X obj 46 258 +~ 1e-15;
+#X obj 46 258 +~ 1e-015;
 #N canvas 1087 158 561 795 comments 0;
 #X text 43 33 Whatever the previous frame's analysis values were \,
 normalize them by dividing by the magnitude. This gives all of the
