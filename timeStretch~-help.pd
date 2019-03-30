@@ -222,7 +222,7 @@ commands to specific targeted voices.;
 #X restore 58 425 pd output;
 #X obj 41 334 cnv 15 130 60 empty empty empty 20 12 0 14 -228856 -66577
 0;
-#N canvas 521 50 907 609 attack-release-playback-basics 0;
+#N canvas 790 90 907 609 attack-release-playback-basics 0;
 #X msg 147 228 bend 0 \$1;
 #X obj 57 538 outlet;
 #X floatatom 97 148 5 0 100 1 % - -;
@@ -408,13 +408,9 @@ results. [timeStretch~] adds functionality for changing sample arrays
 on the fly \, 16-voice polyphony \, and has commands designed for navigating
 the difficulties of time stretching transients.;
 #X obj 225 408 print;
-#X text 213 327 outlet 1: output signal;
-#X text 213 347 outlet 2: "note-off" messages for voices 0-15 \, indicating
-when a voice has finished playback;
+#X text 213 317 outlet 1: output signal;
 #X obj 58 355 timeStretch~;
-#X text 602 600 William Brent \, November 2018;
-#X text 602 580 [timeStretch~] version 0.2;
-#N canvas 247 107 785 300 playhead-positions 0;
+#N canvas 247 107 785 300 playhead-positions 1;
 #X obj 88 93 hsl 64 10 0 100 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 88 113 hsl 64 10 0 100 0 0 empty empty empty -2 -8 0 10 -262144
@@ -502,11 +498,17 @@ when a voice has finished playback;
 #X connect 34 2 15 0;
 #X coords 0 -1 1 1 200 180 1 70 70;
 #X restore 187 440 pd playhead-positions;
-#X connect 0 0 13 0;
-#X connect 1 0 13 0;
-#X connect 3 0 13 0;
-#X connect 6 0 13 0;
-#X connect 7 0 13 0;
-#X connect 13 0 4 0;
-#X connect 13 1 16 0;
-#X connect 13 2 10 0;
+#X text 213 367 outlet 3: "note-off" messages for voices 0-15 \, indicating
+when a voice has finished playback;
+#X text 602 580 [timeStretch~] version 0.2.1;
+#X text 602 600 William Brent \, March 2019;
+#X text 213 337 outlet 2: playhead position of each voice in milliseconds
+\, samples \, and percent (given as a 3-element list);
+#X connect 0 0 12 0;
+#X connect 1 0 12 0;
+#X connect 3 0 12 0;
+#X connect 6 0 12 0;
+#X connect 7 0 12 0;
+#X connect 12 0 4 0;
+#X connect 12 1 13 0;
+#X connect 12 2 10 0;
